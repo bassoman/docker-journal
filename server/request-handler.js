@@ -64,9 +64,8 @@ var actions = {
     collectData(request, function(entry){
       var journalEntryStore = __dirname + '/../journal_entries/entries.txt';
       var stringifiedEntry = JSON.stringify(entry);
-      //console.log("ENTRY INSIDE POST: ", entry);
+      // console.log("ENTRY INSIDE POST: ", entry);
       entries.push(entry);
-      //console.log("entries INSIDE POST: ", entries);
       fs.appendFile(journalEntryStore, stringifiedEntry + ',\n', function(err, file){
         if(!err){
           exports.sendResponse(response, 201);
@@ -81,7 +80,6 @@ var actions = {
       fs.readFile(serveAssets.assets.journalEntries + '/entries.txt', function(err, data){
         if(!err){
           var temp = entry.text;
-          console.log("entry.text INSIDE DELETE: ", entry.text);
           entry.text = entry.text.replace(/[\n]/g, '\r\n');
           var entryStr = JSON.stringify(entry);
           var arrayOfExistingEntries = data.toString().split(',\n');
