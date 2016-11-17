@@ -8,6 +8,7 @@
     "request": "^2.34.0"
   },
   "dependencies": {
-    "bluebird": "^3.4.0"
+    "bluebird": "^3.4.0",
+    "neo4j-driver": "1.0.4"
   }
 }

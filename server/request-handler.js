@@ -1,6 +1,16 @@
 var fs = require('fs');
 var serveAssets = require('./serve-assets.js');
 
+//Require the Neo4J module
+var neo4j = require('neo4j-driver').v1;
+
+// Create a driver instance, for the user neo4j with password sad.
+var driver = neo4j.driver("bolt://neo4j", neo4j.auth.basic("neo4j", "sad"));
+
+// Create a session to run Cypher statements in.
+// Note: Always make sure to close sessions when you are done using them!
+var session = driver.session();
+
 var headers = {
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -62,10 +72,32 @@ var actions = {
   },
   "POST": function(request, response){
     collectData(request, function(entry){
+       console.log("ENTRY INSIDE POST: ", entry);
+  
+      session
+        .run("CREATE (posting:Entry { date: {date}, topic: {topic}, text: {text} })",
+        {
+          date: entry.date,
+          topic: entry.topic,
+          text: entry.text
+        })
+        .subscribe({
+        // onNext: function(record) {
+        //   console.log(record);
+        // },
+        onCompleted: function() {
+          // Completed!
+          session.close();
+        },
+        onError: function(error) {
+          console.log(error);
+        }
+      });
+
       var journalEntryStore = __dirname + '/../journal_entries/entries.txt';
       var stringifiedEntry = JSON.stringify(entry);
-      // console.log("ENTRY INSIDE POST: ", entry);
       entries.push(entry);
+
       fs.appendFile(journalEntryStore, stringifiedEntry + ',\n', function(err, file){
         if(!err){
           exports.sendResponse(response, 201);
