@@ -14,8 +14,7 @@ Journaling from a docker container and persisting data with Neo4j
 
 ## Once in the container bash.
 
-Server is configured to see Neo4j at localhost:7474. Change for other configurations. Using node-neo4j module.
-Learn more here: http://blog.modulus.io/learn-how-to-use-neo4j-with-node.js?utm_content=12954986&utm_medium=social&utm_source=twitter
+Server is configured to see Neo4j at localhost:7474. Change for other configurations. Using [node-neo4j](http://blog.modulus.io/learn-how-to-use-neo4j-with-node.js?utm_content=12954986&utm_medium=social&utm_source=twitter) module.
 
 * cd /app
 * npm install node-neo4j
