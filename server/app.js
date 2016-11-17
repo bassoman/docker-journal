@@ -258,8 +258,8 @@ App.prototype.sortByDate = function(entries){
     }
 
   return entries.sort(function(a,b){
-    var dateForA = a.date.split('-'),
-        dateForB = b.date.split('-');
+    var dateForA = b.date.split('-'),
+        dateForB = a.date.split('-');
 
     return new Date(dateForA[0], months[dateForA[1]], dateForA[2]) - new Date(dateForB[0], months[dateForB[1]], dateForB[2]);
   });
