@@ -18,7 +18,7 @@ Server is configured to see Neo4j at localhost:7474. Change for other configurat
 Learn more here: http://blog.modulus.io/learn-how-to-use-neo4j-with-node.js?utm_content=12954986&utm_medium=social&utm_source=twitter
 
 * cd /app
-* npm install neo4j node-neo4j
+* npm install node-neo4j
 * npm install
 * bower install
 * cd server
